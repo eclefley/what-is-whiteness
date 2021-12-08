@@ -14,7 +14,7 @@ function preload() {
 }
 
 function IsDarknessDetected() {
-    if(darkestPoint.x < 600 && darkestPoint.y < 600) {
+    if(darkestPoint.x < -100 && darkestPoint.y < -100) {
         return true;
     } else {
         return false;
