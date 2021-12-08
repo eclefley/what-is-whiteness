@@ -13,7 +13,15 @@ function preload() {
   //LK1_mp3 = loadSound("LK1.mp3");
 }
 
-function IsDarknessDetected() {
+function IsDarknessDetectedZone1() {
+    if(darkestPoint.x > 20 && darkestPoint.y < 100) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function IsDarknessDetectedZone2() {
     if(darkestPoint.x > 800 && darkestPoint.y < 600) {
         return true;
     } else {
@@ -21,9 +29,13 @@ function IsDarknessDetected() {
     }
 }
 
-function darknessDetected() {
-    if (IsDarknessDetected(true)) {
+function darknessIsDetected() {
+    if (IsDarknessDetectedZone1(true)) {
         print("LK1");
+        //LK1_mp3.play();
+    }
+    if (IsDarknessDetectedZone2(true)) {
+        print("LK2");
         //LK1_mp3.play();
     }
 }
@@ -81,7 +93,7 @@ function draw() {
     image(myCapture, 0, 0);
   }
   */
-      darknessDetected();
+      darknessIsDetected();
   }
 }
 
