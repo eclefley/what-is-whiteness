@@ -35,15 +35,11 @@ function darknessIsDetected() {
     if (IsDarknessDetectedZone1(true)) {
         print("LK1");
         //LK1_mp3.play();
-    } else {
-    image(myCapture, 0, 0);
-  }
+    }
     if (IsDarknessDetectedZone2(true)) {
         print("LK2");
         //LK2_mp3.play();
-    } else {
-    image(myCapture, 0, 0);
-  }
+    }
 }
 
 function setup() {
