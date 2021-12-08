@@ -33,13 +33,13 @@ function detectDarknessZone2() {
 
 function darknessIsDetected() {
     if (detectDarknessZone1(true)) {
-        //  print("LK1");
-        LK1_mp3.play();
+          print("LK1");
+        //LK1_mp3.play();
     }
     
     if (detectDarknessZone2(true)) {
-        //  print("LK1");
-        LK2_mp3.play();
+          print("LK2");
+        //LK2_mp3.play();
     }
 }
 
