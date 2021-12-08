@@ -11,7 +11,7 @@ let LK1_mp3;
 let LK2_mp3;
 
 function preload() {
-  //LK1_mp3 = loadSound("LK1.mp3");
+  LK1_mp3 = loadSound("LK1.mp3");
   LK2_mp3 = loadSound("LK2.mp3");
 }
 
@@ -34,11 +34,11 @@ function IsDarknessDetectedZone2() {
 function darknessIsDetected() {
     if (IsDarknessDetectedZone1(true)) {
         //print("LK1");
-        //LK1_mp3.play();
+        LK1_mp3.play();
     }
     if (IsDarknessDetectedZone2(true)) {
         //print("LK2");
-        LK2_mp3.play();
+        //LK2_mp3.play();
     }
 }
 
