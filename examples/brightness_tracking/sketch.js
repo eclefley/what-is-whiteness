@@ -12,7 +12,7 @@ let LK2_mp3;
 
 function preload() {
   LK1_mp3 = loadSound("LK1.mp3");
-  LK1_mp3 = loadSound("LK1.mp3");
+  LK2_mp3 = loadSound("LK2.mp3");
 }
 
 function IsDarknessDetectedZone1() {
