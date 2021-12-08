@@ -8,14 +8,12 @@ let myMat;
 let myMatGrayscale;
 let darkestPoint;
 let LK1_mp3;
-let LK2_mp3;
 
 function preload() {
-  LK1_mp3 = loadSound("LK1.mp3");
-  LK2_mp3 = loadSound("LK2.mp3");
+  //LK1_mp3 = loadSound("LK1.mp3");
 }
 
-function detectDarknessZone1() {
+function IsDarknessDetected() {
     if(darkestPoint.x < 100 && darkestPoint.y < 100) {
         return true;
     } else {
@@ -23,23 +21,10 @@ function detectDarknessZone1() {
     }
 }
 
-function detectDarknessZone2() {
-    if(darkestPoint.x < 600 && darkestPoint.y < 600) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-function darknessIsDetected() {
-    if (detectDarknessZone1(true)) {
-          print("LK1");
+function darknessDetected() {
+    if (IsDarknessDetected(true)) {
+        print("LK1");
         //LK1_mp3.play();
-    }
-    
-    if (detectDarknessZone2(true)) {
-          print("LK2");
-        //LK2_mp3.play();
     }
 }
 
@@ -96,7 +81,7 @@ function draw() {
     image(myCapture, 0, 0);
   }
   */
-      darknessIsDetected();
+      darknessDetected();
   }
 }
 
