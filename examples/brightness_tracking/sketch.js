@@ -38,7 +38,7 @@ function darknessIsDetected() {
     }
     if (IsDarknessDetectedZone2(true)) {
         //print("LK2");
-        //LK2_mp3.play();
+        LK2_mp3.play();
     }
 }
 
