@@ -34,7 +34,7 @@ function IsDarknessDetectedZone2() {
 }
 
 function IsDarknessDetectedZone3() {
-    if(darkestPoint.x > 720 && darkestPoint.y > 540) {
+    if(darkestPoint.x > 720 && darkestPoint.y < 100) {
         return true;
     } else {
         return false;
