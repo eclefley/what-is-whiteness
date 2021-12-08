@@ -10,11 +10,13 @@ let darkestPoint;
 let LK1_mp3;
 let LK2_mp3;
 let LK3_mp3;
+let LK4_mp3;
 
 function preload() {
   //LK1_mp3 = loadSound("LK1.mp3");
   //LK2_mp3 = loadSound("LK2.mp3");
-  //LK2_mp3 = loadSound("LK2.mp3");
+  //LK3_mp3 = loadSound("LK3.mp3");
+  //LK4_mp3 = loadSound("LK4.mp3");
 }
 
 function IsDarknessDetectedZone1() {
@@ -41,6 +43,14 @@ function IsDarknessDetectedZone3() {
     }
 }
 
+function IsDarknessDetectedZone4() {
+    if(darkestPoint.x < 100 && darkestPoint.y > 540) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 function darknessIsDetected() {
     if (IsDarknessDetectedZone1(true)) {
         print("LK1");
@@ -53,6 +63,10 @@ function darknessIsDetected() {
     if (IsDarknessDetectedZone3(true)) {
         print("LK3");
         //LK3_mp3.play();
+    }
+    if (IsDarknessDetectedZone4(true)) {
+        print("LK4");
+        //LK4_mp3.play();
     }
 }
 
