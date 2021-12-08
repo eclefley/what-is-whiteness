@@ -10,7 +10,7 @@ let darkestPoint;
 let LK1_mp3;
 
 function preload() {
-  //LK1_mp3 = loadSound("LK1.mp3");
+  LK1_mp3 = loadSound("LK1.mp3");
 }
 
 function IsDarknessDetected() {
@@ -23,8 +23,8 @@ function IsDarknessDetected() {
 
 function darknessDetected() {
     if (IsDarknessDetected(true)) {
-        print("LK1");
-        //LK1_mp3.play();
+        //  print("LK1");
+        LK1_mp3.play();
     }
 }
 
