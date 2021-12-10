@@ -72,7 +72,7 @@ function onOpenCVComplete() {
 function clearText () {
     let index = floor(available.length);
     //[0] indexes currentTextPrinted into array
-    let spot = available.splice(index, 3)/*[0]*/;
+    let spot = available.splice(index, 3)[0];
     let i = spot[0];
     let j = spot[1];
     let k = spot[2];
