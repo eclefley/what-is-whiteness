@@ -15,7 +15,7 @@ let LK3_mp3;
 let LK4_mp3;
 
 //store current state for all zone information
-let zone = ['','',''];
+let zone = ['','','',''];
 
 //store a value for each print function
 let zoneLocation = ['LK1','LK2','LK3','LK4'];
@@ -72,13 +72,15 @@ function onOpenCVComplete() {
 function clearText () {
     let index = floor(available.length);
     //[0] indexes currentTextPrinted into array
-    let spot = available.splice(index, 3)[0];
-    let i = spot[0];
-    let j = spot[1];
-    let k = spot[2];
-    let l = spot[3];
-    zone[i][j][k][l] = currentTextPrinted;
-    currentTextPrinted = zoneLocation;
+    let zoneStateVariable = available.splice(index, 3)[0];
+    let i = zoneStateVariable[0];
+    let j = zoneStateVariable[1];
+    let k = zoneStateVariable[2];
+    let l = zoneStateVariable[3];
+    zone[i][j][k][l] = zoneLocation[currentTextPrinted];
+    currentTextPrinted = (currentTextPrinted + 1) % zoneLocation.length;
+    //zone[i][j][k][l] = currentTextPrinted;
+    //currentTextPrinted = zoneLocation;
 }
 
 function draw() {
@@ -104,8 +106,8 @@ function draw() {
                 print("LK4");
             }
         }
+        clearText();
     }
-    clearText();
 }
 
 
