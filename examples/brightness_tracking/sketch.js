@@ -1,3 +1,4 @@
+/*
 let myCapture;
 // OpenCV capture helper
 let myCVCapture;
@@ -36,20 +37,24 @@ function setup() {
     p5.cv.onComplete = onOpenCVComplete;
     
     //set text being printed to corresponding zone
-    if (zone == [0]) {
-        currentTextPrinted = [0];
-    } else if (zone == [1]) {
-        currentTextPrinted = [1];
-    } else if (zone == [2]) {
-        currentTextPrinted = [2];
-    } else if (zone == [3]) {
-        currentTextPrinted = [3];
-    } 
+    // if ( ['', '', '', ''] == [0] )
+//    if (zone == [0]) {
+//        currentTextPrinted = [0];
+//    } else if (zone == [1]) {
+//        currentTextPrinted = [1];
+//    } else if (zone == [2]) {
+//        currentTextPrinted = [2];
+//    } else if (zone == [3]) {
+//        currentTextPrinted = [3];
+//    } 
     
     //makes the zones available to print the text -> push starts new drawing state
     for (let j = 0; j < 4; j++) {
         available.push([j]);
     }
+    
+    // result
+    // available = [ [0], [1], [2], [3] ]
 }
 
 function preload() {
@@ -74,10 +79,12 @@ function clearText () {
     //[0] indexes currentTextPrinted into array
     let zoneStateVariable = available.splice(index, 3)[0];
     let i = zoneStateVariable[0];
-    let j = zoneStateVariable[1];
-    let k = zoneStateVariable[2];
-    let l = zoneStateVariable[3];
-    zone[i][j][k][l] = zoneLocation[currentTextPrinted];
+    let i = zoneStateVariable[0];
+    zone[i] = zoneLocation[currentTextPrinted];
+    //let j = zoneStateVariable[1];
+    //let k = zoneStateVariable[2];
+    //let l = zoneStateVariable[3];
+    //zone[i][j][k][l] = zoneLocation[currentTextPrinted];
     currentTextPrinted = (currentTextPrinted + 1) % zoneLocation.length;
     //zone[i][j][k][l] = currentTextPrinted;
     //currentTextPrinted = zoneLocation;
@@ -110,6 +117,7 @@ function draw() {
     }
 }
 
+*/
 
 
 
@@ -121,7 +129,6 @@ function draw() {
 
 
 
-/*
 // p5.js Video capture
 let myCapture;
 // OpenCV capture helper
@@ -176,19 +183,19 @@ function IsDarknessDetectedZone4() {
 }
 
 function darknessIsDetected() {
-    if (IsDarknessDetectedZone1(true)) {
+    if (IsDarknessDetectedZone1()) {
         print("LK1");
         //LK1_mp3.play();
     }
-    if (IsDarknessDetectedZone2(true)) {
+    if (IsDarknessDetectedZone2()) {
         print("LK2");
         //LK2_mp3.play();
     }
-    if (IsDarknessDetectedZone3(true)) {
+    if (IsDarknessDetectedZone3()) {
         print("LK3");
         //LK3_mp3.play();
     }
-    if (IsDarknessDetectedZone4(true)) {
+    if (IsDarknessDetectedZone4()) {
         print("LK4");
         //LK4_mp3.play();
     }
@@ -221,7 +228,7 @@ function draw() {
     p5.cv.copyGray(myMat, myMatGrayscale);
     // display Mat
     p5.cv.drawMat(myMatGrayscale, 0, 0);
-    // get darkest point
+    // get darkest point (for each zone simultaneously)
     darkestPoint = p5.cv.findMinLocation(myMatGrayscale);
     // draw darkest point
     //circle(darkestPoint.x, darkestPoint.y, 30);
@@ -247,7 +254,7 @@ function draw() {
     image(myCapture, 0, 0);
   }
   */
-  //    darknessIsDetected();
- // }
-//}
+      darknessIsDetected();
+  }
+}
 
