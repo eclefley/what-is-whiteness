@@ -116,7 +116,6 @@ function draw() {
     p5.cv.copyGray(myMat, myMatGrayscale);
     // display Mat
     p5.cv.drawMat(myMatGrayscale, 0, 0);
-    p5.cv.autothreshold(myMatGrayscale);
     // get darkest point
     darkestPoint = p5.cv.findMinLocation(myMatGrayscale);
     // draw darkest point
