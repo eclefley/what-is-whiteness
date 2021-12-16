@@ -14,6 +14,7 @@ let Loop_Voice_Audio;
 let LK2_DS;
 let LK3_BASS;
 let LK4_A;
+let LK2_FS;
 let img1;
 let img2;
 let img3;
