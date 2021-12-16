@@ -9,6 +9,10 @@ let myMat;
 // Mat to store the grayscale converted camera frame
 let myMatGrayscale;
 let darkestPoint;
+let LK1_mp3;
+let LK2_mp3;
+let LK3_mp3;
+let LK4_mp3;
 
 let zoneOne = {
     box: {
@@ -59,7 +63,9 @@ let zoneArray = [zoneOne, zoneTwo, zoneThree, zoneFour];
 function activateZone (zone) {
     zone.isActive = true;
     
-    print(zone.name, " was just activated");
+    
+    
+    //print(zone.name, " was just activated");
 }
 
 function deactivateZone (zone) {
@@ -80,10 +86,10 @@ function isDarkestPointInZone(zone) {
 }
 
 function preload() {
-  //LK1_mp3 = loadSound("LK1.mp3");
-  //LK2_mp3 = loadSound("LK2.mp3");
-  //LK3_mp3 = loadSound("LK3.mp3");
-  //LK4_mp3 = loadSound("LK4.mp3");
+  LK1_mp3 = loadSound("LK1.mp3");
+  LK2_mp3 = loadSound("LK2.mp3");
+  LK3_mp3 = loadSound("LK3.mp3");
+  LK4_mp3 = loadSound("LK4.mp3");
 }
 
 function setup() {
