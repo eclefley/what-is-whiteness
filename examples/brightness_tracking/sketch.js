@@ -66,17 +66,6 @@ let zoneFour = {
 
 let zoneArray = [zoneOne, zoneTwo, zoneThree, zoneFour];
 
-function preload() {
-    //Ending_Voice_Audio = loadSound("VOICE_ENDING.wav");
-    //Loop_Voice_Audio = loadSound("VOICE_LOOP.wav");
-    LK2_DS = loadSound("LK2_DS.wav");
-    LK3_BASS = loadSound("LK3_BASS.wav");
-    LK4_A = loadSound("LK4_A.wav");
-    LK2_FS = loadSound("LK2_FS.wav");
-    //img1;
-    //img2; 
-    //img3;
-}
 
 function soundLK2_DS() {
     len = LK2_DS.duration();
@@ -149,10 +138,6 @@ function activateZone(zone) {
     }
     */
     
-    
-    //if(LK2_DS.currentTime() == 12) {
-      //  LK2_DS.stop();
-    //} 
     if(zone == zoneOne) {
         soundLK2_DS();
     }
@@ -197,6 +182,11 @@ function setup() {
   myCapture.hide();
   // wait for OpenCV to init
   p5.cv.onComplete = onOpenCVComplete;
+    
+  LK2_DS = loadSound("LK2_DS.wav");
+  LK3_BASS = loadSound("LK3_BASS.wav");
+  LK4_A = loadSound("LK4_A.wav");
+  LK2_FS = loadSound("LK2_FS.wav");
 }
 
 function onOpenCVComplete() {
