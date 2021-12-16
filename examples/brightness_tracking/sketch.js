@@ -9,17 +9,22 @@ let myMat;
 // Mat to store the grayscale converted camera frame
 let myMatGrayscale;
 let darkestPoint;
-let LK1_mp3;
-let LK2_mp3;
-let LK3_mp3;
-let LK4_mp3;
+let Ending_Voice_Audio;
+let Loop_Voice_Audio;
+let LK2_DS;
+let LK3_BASS;
+let LK4_A;
+let img1;
+let img2;
+let img3;
+var len;
 
 let zoneOne = {
     box: {
         x: 0,
         y: 0,
-        width: 100,
-        height: 100,
+        width: 50,
+        height: 50,
     },
     isActive: false,
     name: 'LK1',
@@ -29,8 +34,8 @@ let zoneTwo = {
     box: {
     x: 0,
     y: 0,
-    width: 720,
-    height: 540,
+    width: 770,
+    height: 590,
     },
     isActive: false,
     name: 'LK2',
@@ -40,8 +45,8 @@ let zoneThree = {
     box: {
     x: 0,
     y: 0,
-    width: 720,
-    height: 100,
+    width: 770,
+    height: 5,
     },
     isActive: false,
     name: 'LK3',
@@ -51,8 +56,8 @@ let zoneFour = {
     box: {
     x: 0,
     y: 0,
-    width: 100,
-    height: 540,
+    width: 50,
+    height: 590,
     },
     isActive: false,
     name: 'LK4',
@@ -60,12 +65,110 @@ let zoneFour = {
 
 let zoneArray = [zoneOne, zoneTwo, zoneThree, zoneFour];
 
-function activateZone (zone) {
+function preload() {
+    //Ending_Voice_Audio = loadSound("VOICE_ENDING.wav");
+    //Loop_Voice_Audio = loadSound("VOICE_LOOP.wav");
+    LK2_DS = loadSound("LK2_DS.wav");
+    LK3_BASS = loadSound("LK3_BASS.wav");
+    LK4_A = loadSound("LK4_A.wav");
+    LK2_FS = loadSound("LK2_FS.wav");
+    //img1;
+    //img2; 
+    //img3;
+}
+
+function soundLK2_DS() {
+    len = LK2_DS.duration();
+    
+    for (i = 0; i < len; i++) {
+        
+        if(!LK2_DS.isPlaying() && i == 0) {
+            LK2_DS.play();
+        } else if(i == len) {
+            LK2_DS.stop;
+            //i = 0;
+        }
+    }
+}
+
+function soundLK3_BASS() {
+    len = LK3_BASS.duration();
+    
+    for (i = 0; i < len; i++) {
+        
+        if(!LK3_BASS.isPlaying() && i == 0) {
+            LK3_BASS.play();
+        } else if(i == len) {
+            LK3_BASS.stop;
+            //i = 0;
+        }
+    }
+}
+
+function soundLK4_A() {
+    len = LK4_A.duration();
+    
+    for (i = 0; i < len; i++) {
+        
+        if(!LK4_A.isPlaying() && i == 0) {
+            LK4_A.play();
+        } else if(i == len) {
+            LK4_A.stop;
+            //i = 0;
+        }
+    }
+}
+
+function soundLK2_FS() {
+    len = LK2_FS.duration();
+    
+    for (i = 0; i < len; i++) {
+        
+        if(!LK2_FS.isPlaying() && i == 0) {
+            LK2_FS.play();
+        } else if(i == len) {
+            LK2_FS.stop;
+            //i = 0;
+        }
+    }
+}
+
+function activateZone(zone) {
     zone.isActive = true;
     
     
+    //console.log(len);
+    //=12
+    /*
+    //use for looping audio
+    if(LK2_DS.isPlaying() && LK2_DS.currentTime() == 12) {
+        LK2_DS.stop();
+    } else if(LK2_DS.currentTime() == 0) {
+        LK2_DS.play();
+    }
+    */
     
-    //print(zone.name, " was just activated");
+    
+    //if(LK2_DS.currentTime() == 12) {
+      //  LK2_DS.stop();
+    //} 
+    if(zone == zoneOne) {
+        soundLK2_DS();
+    }
+    
+    if(zone == zoneTwo) {
+        soundLK3_BASS();
+    }
+    
+    if(zone == zoneThree) {
+        soundLK4_A();
+    }
+    
+    if(zone == zoneFour) {
+        soundLK2_FS();
+    }
+    
+    print(zone.name, " was just activated");
 }
 
 function deactivateZone (zone) {
@@ -83,13 +186,6 @@ function isDarkestPointInZone(zone) {
     } else {
         return false;
     }
-}
-
-function preload() {
-  LK1_mp3 = loadSound("LK1.mp3");
-  LK2_mp3 = loadSound("LK2.mp3");
-  LK3_mp3 = loadSound("LK3.mp3");
-  LK4_mp3 = loadSound("LK4.mp3");
 }
 
 function setup() {
