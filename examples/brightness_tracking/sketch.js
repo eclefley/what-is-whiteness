@@ -9,16 +9,24 @@ let myMat;
 // Mat to store the grayscale converted camera frame
 let myMatGrayscale;
 let darkestPoint;
+
+//sounds
 let Ending_Voice_Audio;
 let Loop_Voice_Audio;
 let LK2_DS;
 let LK3_BASS;
 let LK4_A;
 let LK2_FS;
-let img1;
-let img2;
-let img3;
 var len;
+
+//images
+//let meditationImages = [];
+let imageOne;
+let img;
+var vidfade;
+var vidfadeAmount = 3;
+var imgfade;
+var imgfadeAmount = 3;
 
 let zoneOne = {
     box: {
@@ -76,7 +84,6 @@ function soundLK2_DS() {
             LK2_DS.play();
         } else if(i == len) {
             LK2_DS.stop;
-            //i = 0;
         }
     }
 }
@@ -90,7 +97,6 @@ function soundLK3_BASS() {
             LK3_BASS.play();
         } else if(i == len) {
             LK3_BASS.stop;
-            //i = 0;
         }
     }
 }
@@ -104,7 +110,6 @@ function soundLK4_A() {
             LK4_A.play();
         } else if(i == len) {
             LK4_A.stop;
-            //i = 0;
         }
     }
 }
@@ -121,6 +126,10 @@ function soundLK2_FS() {
             //i = 0;
         }
     }
+}
+
+function meditationImageOne() {
+    //image(imageOne, 0, 0);
 }
 
 function activateZone(zone) {
@@ -140,6 +149,7 @@ function activateZone(zone) {
     
     if(zone == zoneOne) {
         soundLK2_DS();
+        //meditationImageOne();
     }
     
     if(zone == zoneTwo) {
@@ -175,53 +185,56 @@ function isDarkestPointInZone(zone) {
 }
 
 function setup() {
-  createCanvas(820, 640);
-  // setup p5 capture
-  myCapture = createCapture(VIDEO);
-  myCapture.size(820, 640);
-  myCapture.hide();
-  // wait for OpenCV to init
-  p5.cv.onComplete = onOpenCVComplete;
-    
-  LK2_DS = loadSound("LK2_DS.wav");
-  LK3_BASS = loadSound("LK3_BASS.wav");
-  LK4_A = loadSound("LK4_A.wav");
-  LK2_FS = loadSound("LK2_FS.wav");
+    createCanvas(820, 640);
+    // setup p5 capture
+    myCapture = createCapture(VIDEO);
+    myCapture.size(820, 640);
+    myCapture.hide();
+    // wait for OpenCV to init
+    p5.cv.onComplete = onOpenCVComplete;
+
+    LK2_DS = loadSound("LK2_DS.wav");
+    LK3_BASS = loadSound("LK3_BASS.wav");
+    LK4_A = loadSound("LK4_A.wav");
+    LK2_FS = loadSound("LK2_FS.wav");
+
+    imageOne = loadImage('meditation2.jpg');
 }
 
 function onOpenCVComplete() {
-  // create a CV capture helper
-  myCVCapture = p5.cv.getCvVideoCapture(myCapture);
-  // create a CV Mat to read new color frames into
-  myMat = p5.cv.getRGBAMat(820, 640);
-  // create a CV mat for color to grayscale conversion
-  myMatGrayscale = new cv.Mat();
+    // create a CV capture helper
+    myCVCapture = p5.cv.getCvVideoCapture(myCapture);
+    // create a CV Mat to read new color frames into
+    myMat = p5.cv.getRGBAMat(820, 640);
+    // create a CV mat for color to grayscale conversion
+    myMatGrayscale = new cv.Mat();
 }
 
 let i;
 let zone;
 
 function draw() {
-  if (p5.cv.isReady) {
-    // read from CV Capture into myMat
-    myCVCapture.read(myMat);
-    // convert Mat to grayscale
-    p5.cv.copyGray(myMat, myMatGrayscale);
-    // display Mat
-    p5.cv.drawMat(myMatGrayscale, 0, 0);
-    // get darkest point
-    darkestPoint = p5.cv.findMinLocation(myMatGrayscale);
-    // draw darkest point
-    //circle(darkestPoint.x, darkestPoint.y, 30);
-    
-    for (i = 0; i < zoneArray.length; i+=1) {
-        zone = zoneArray[i];
+    if (p5.cv.isReady) {
+        // read from CV Capture into myMat
+        myCVCapture.read(myMat);
+        // convert Mat to grayscale
+        p5.cv.copyGray(myMat, myMatGrayscale);
+        // display Mat
+        p5.cv.drawMat(myMatGrayscale, 0, 0);
+        // get darkest point
+        darkestPoint = p5.cv.findMinLocation(myMatGrayscale);
+        // draw darkest point
+        //circle(darkestPoint.x, darkestPoint.y, 30);
+
         
-        if(isDarkestPointInZone(zone) && zone.isActive == false) {
-            activateZone(zone);
-        } else if(!isDarkestPointInZone(zone) && zone.isActive == true) {
-            deactivateZone(zone);
+        for (i = 0; i < zoneArray.length; i+=1) {
+            zone = zoneArray[i];
+
+            if(isDarkestPointInZone(zone) && zone.isActive == false) {
+                activateZone(zone);
+            } else if(!isDarkestPointInZone(zone) && zone.isActive == true) {
+                deactivateZone(zone);
+            }
         }
-    } 
-  }
+    }
 }
