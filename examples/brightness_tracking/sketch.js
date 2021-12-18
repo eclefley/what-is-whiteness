@@ -10,24 +10,6 @@ let myMat;
 let myMatGrayscale;
 let darkestPoint;
 
-//sounds
-let Ending_Voice_Audio;
-let Loop_Voice_Audio;
-let LK2_DS;
-let LK3_BASS;
-let LK4_A;
-let LK2_FS;
-var len;
-
-//images
-//let meditationImages = [];
-let imageOne;
-let img;
-var vidfade;
-var vidfadeAmount = 3;
-var imgfade;
-var imgfadeAmount = 3;
-
 let zoneOne = {
     box: {
         x: 0,
@@ -74,70 +56,82 @@ let zoneFour = {
 
 let zoneArray = [zoneOne, zoneTwo, zoneThree, zoneFour];
 
+//sounds
+let Ending_Voice_Audio;
+let Loop_Voice_Audio;
+var len;
+let randSound;
 
-function soundLK2_DS() {
-    len = LK2_DS.duration();
+let bellSounds = [];
+let dingSounds = [];
+let bassSounds = [];
+let singingSounds = [];
+
+function playBellSounds() {
+    //bell = bellSounds[j];
+    randSound = random(bellSounds);
+    len = random(bellSounds).duration();
     
-    for (i = 0; i < len; i++) {
-        
-        if(!LK2_DS.isPlaying() && i == 0) {
-            LK2_DS.play();
-        } else if(i == len) {
-            LK2_DS.stop;
-        }
-    }
-}
-
-function soundLK3_BASS() {
-    len = LK3_BASS.duration();
     
-    for (i = 0; i < len; i++) {
-        
-        if(!LK3_BASS.isPlaying() && i == 0) {
-            LK3_BASS.play();
-        } else if(i == len) {
-            LK3_BASS.stop;
-        }
-    }
+    if(!randSound.isPlaying() && randSound.isLoaded()) {
+        randSound.play();
+        console.log("playing")
+    } else if(randSound == len) {
+        randSound.stop;
+        console.log("stopping")
+    }  
 }
 
-function soundLK4_A() {
-    len = LK4_A.duration();
+function playSingingSounds() {
+    randSound = random(singingSounds);
+    len = random(singingSounds).duration();
     
-    for (i = 0; i < len; i++) {
-        
-        if(!LK4_A.isPlaying() && i == 0) {
-            LK4_A.play();
-        } else if(i == len) {
-            LK4_A.stop;
-        }
-    }
-}
-
-function soundLK2_FS() {
-    len = LK2_FS.duration();
     
-    for (i = 0; i < len; i++) {
-        
-        if(!LK2_FS.isPlaying() && i == 0) {
-            LK2_FS.play();
-        } else if(i == len) {
-            LK2_FS.stop;
-            //i = 0;
-        }
-    }
+    if(!randSound.isPlaying() && randSound.isLoaded()) {
+        randSound.play();
+        console.log("playing")
+    } else if(randSound == len) {
+        randSound.stop;
+        console.log("stopping")
+    }  
 }
 
-function meditationImageOne() {
-    //image(imageOne, 0, 0);
+function playDingSounds() {
+    randSound = random(dingSounds);
+    len = random(dingSounds).duration();
+    
+    
+    if(!randSound.isPlaying() && randSound.isLoaded()) {
+        randSound.play();
+        console.log("playing")
+    } else if(randSound == len) {
+        randSound.stop;
+        console.log("stopping")
+    }  
 }
+
+function playBassSounds() {
+    randSound = random(bassSounds);
+    len = random(bassSounds).duration();
+    
+    
+    if(!randSound.isPlaying() && randSound.isLoaded()) {
+        randSound.play();
+        console.log("playing")
+    } else if(randSound == len) {
+        randSound.stop;
+        console.log("stopping")
+    }  
+}
+ 
+
 
 function activateZone(zone) {
     zone.isActive = true;
     
+    //adjust sound volume using p5js lib function -> see coding train
     
-    //console.log(len);
-    //=12
+    
     /*
     //use for looping audio
     if(LK2_DS.isPlaying() && LK2_DS.currentTime() == 12) {
@@ -145,23 +139,27 @@ function activateZone(zone) {
     } else if(LK2_DS.currentTime() == 0) {
         LK2_DS.play();
     }
+    
+    //https://p5js.org/reference/#/p5.SoundLoop
+    //https://p5js.org/reference/#/p5.SoundFile/setVolume
+    //https://p5js.org/reference/#/p5.SoundFile/jump
+    //https://p5js.org/reference/#/p5.SoundFile/addCue
     */
     
     if(zone == zoneOne) {
-        soundLK2_DS();
-        //meditationImageOne();
+        playBellSounds();
     }
     
     if(zone == zoneTwo) {
-        soundLK3_BASS();
+        playSingingSounds();
     }
     
     if(zone == zoneThree) {
-        soundLK4_A();
+        playDingSounds();
     }
     
     if(zone == zoneFour) {
-        soundLK2_FS();
+        playBassSounds();
     }
     
     print(zone.name, " was just activated");
@@ -192,13 +190,23 @@ function setup() {
     myCapture.hide();
     // wait for OpenCV to init
     p5.cv.onComplete = onOpenCVComplete;
-
-    LK2_DS = loadSound("LK2_DS.wav");
-    LK3_BASS = loadSound("LK3_BASS.wav");
-    LK4_A = loadSound("LK4_A.wav");
-    LK2_FS = loadSound("LK2_FS.wav");
-
-    imageOne = loadImage('meditation2.jpg');
+        
+    loopingVoice.push(loadSound("bell_C.wav"));
+    
+    bellSounds.push(loadSound("bell_C.wav"));
+    bellSounds.push(loadSound("bell_FS.wav"));
+    bellSounds.push(loadSound("bell_A.wav"));
+    
+    singingSounds.push(loadSound("voice1.mp3"));
+    singingSounds.push(loadSound("voice2.mp3"));
+    singingSounds.push(loadSound("voice3.mp3"));
+    singingSounds.push(loadSound("voice4.mp3")); 
+    
+    dingSounds.push(loadSound("ding_AS.wav"));
+    dingSounds.push(loadSound("ding_FS.wav"));
+    dingSounds.push(loadSound("ding_DS.wav"));
+    
+    bassSounds.push(loadSound("bassInOut.wav"));
 }
 
 function onOpenCVComplete() {

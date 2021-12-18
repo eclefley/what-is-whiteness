@@ -221,3 +221,58 @@ print("LK4");
     image(myCapture, 0, 0);
   }
   */
+
+/*
+function soundLK2_DS() {
+    len = LK2_DS.duration();
+    
+    for (i = 0; i < len; i++) {
+        
+        if(!LK2_DS.isPlaying() && i == 0) {
+            LK2_DS.play();
+        } else if(i == len) {
+            LK2_DS.stop;
+        }
+    }
+}
+
+function soundLK3_BASS() {
+    len = LK3_BASS.duration();
+    
+    for (i = 0; i < len; i++) {
+        
+        if(!LK3_BASS.isPlaying() && i == 0) {
+            LK3_BASS.play();
+        } else if(i == len) {
+            LK3_BASS.stop;
+        }
+    }
+}
+
+function soundLK4_A() {
+    len = LK4_A.duration();
+    
+    for (i = 0; i < len; i++) {
+        
+        if(!LK4_A.isPlaying() && i == 0) {
+            LK4_A.play();
+        } else if(i == len) {
+            LK4_A.stop;
+        }
+    }
+}
+
+function soundLK2_FS() {
+    len = LK2_FS.duration();
+    
+    for (i = 0; i < len; i++) {
+        
+        if(!LK2_FS.isPlaying() && i == 0) {
+            LK2_FS.play();
+        } else if(i == len) {
+            LK2_FS.stop;
+            //i = 0;
+        }
+    }
+}
+*/
