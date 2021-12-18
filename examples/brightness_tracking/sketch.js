@@ -122,54 +122,37 @@ function playBassSounds() {
     }  
 }
  
-function playMeditationVoiceLoop() {
+function doMeditationVoiceLoop() {
     if(!meditationVoiceLoop.isPlaying() && meditationVoiceLoop.isLoaded()) {
         meditationVoiceLoop.loop();
-        //meditationVoiceLoop.duration();
-        //console.log(meditationVoiceLoop.duration());
+        meditationVoiceLoop.duration();
+        console.log(meditationVoiceLoop.duration());
     } 
 }
- 
+
 function stopMeditationVoiceLoop() {
     if(meditationVoiceLoop.isPlaying() == true) {
         meditationVoiceLoop.pause();
     } 
 }
 
-function startMeditationVoiceEnding() {
-    len = meditationVoiceEnding.duration();
-    
+function doMeditationVoiceImages() {
+    len = meditationVoiceImages.duration();
+
     for (i = 0; i < len; i++) {
-        
-        if (!meditationVoiceEnding.isPlaying() && meditationVoiceEnding.isLoaded()) {
+        if (!meditationVoiceImages.isPlaying() && meditationVoiceImages.isLoaded()) {
             stopMeditationVoiceLoop();
-            meditationVoiceEnding.play();
+            meditationVoiceImages.play();
         } else if (i == len) {
-                meditationVoiceEnding.stop;
-                playMeditationVoiceLoop();
+                meditationVoiceImages.stop;
+                doMeditationVoiceLoop();
         }
     }
 }
 
+
 function activateZone(zone) {
     zone.isActive = true;
-    
-    //adjust sound volume using p5js lib function -> see coding train
-    
-    
-    /*
-    //use for looping audio
-    if(LK2_DS.isPlaying() && LK2_DS.currentTime() == 12) {
-        LK2_DS.stop();
-    } else if(LK2_DS.currentTime() == 0) {
-        LK2_DS.play();
-    }
-    
-    //https://p5js.org/reference/#/p5.SoundLoop
-    //https://p5js.org/reference/#/p5.SoundFile/setVolume
-    //https://p5js.org/reference/#/p5.SoundFile/jump
-    //https://p5js.org/reference/#/p5.SoundFile/addCue
-    */
     
     if(zone == zoneOne) {
         playBellSounds();
@@ -192,10 +175,7 @@ function activateZone(zone) {
 
 function deactivateZone (zone) {
     zone.isActive = false;
-    
-        
     print(zone.name, " was just de-activated");
-
 }
 
 //ex: isDarkestPointInZone(zoneOne);
@@ -232,7 +212,7 @@ function setup() {
     bassSounds.push(loadSound("bassInOut.wav"));
     
     meditationVoiceLoop = loadSound("voice_loop.wav");
-    meditationVoiceEnding = loadSound("voice_ending.wav");
+    meditationVoiceImages = loadSound("voice_with_images.wav");
 }
 
 function onOpenCVComplete() {
@@ -271,7 +251,7 @@ function draw() {
             }
         }
         
-        playMeditationVoiceLoop();
-        meditationVoiceLoop.addCue(216, startMeditationVoiceEnding);
+        doMeditationVoiceLoop();
+        meditationVoiceLoop.addCue(146, doMeditationVoiceImages);
     }
 }
