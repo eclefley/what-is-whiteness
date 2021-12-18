@@ -57,21 +57,19 @@ let zoneFour = {
 let zoneArray = [zoneOne, zoneTwo, zoneThree, zoneFour];
 
 //sounds
-let Ending_Voice_Audio;
-let Loop_Voice_Audio;
 var len;
 let randSound;
-
 let bellSounds = [];
 let dingSounds = [];
 let bassSounds = [];
 let singingSounds = [];
+let meditationVoiceLoop;
 
 function playBellSounds() {
     //bell = bellSounds[j];
     randSound = random(bellSounds);
     len = random(bellSounds).duration();
-    
+    randSound.setVolume(0.1);
     
     if(!randSound.isPlaying() && randSound.isLoaded()) {
         randSound.play();
@@ -85,7 +83,7 @@ function playBellSounds() {
 function playSingingSounds() {
     randSound = random(singingSounds);
     len = random(singingSounds).duration();
-    
+    randSound.setVolume(0.1);
     
     if(!randSound.isPlaying() && randSound.isLoaded()) {
         randSound.play();
@@ -99,7 +97,7 @@ function playSingingSounds() {
 function playDingSounds() {
     randSound = random(dingSounds);
     len = random(dingSounds).duration();
-    
+    randSound.setVolume(0.8);
     
     if(!randSound.isPlaying() && randSound.isLoaded()) {
         randSound.play();
@@ -113,7 +111,7 @@ function playDingSounds() {
 function playBassSounds() {
     randSound = random(bassSounds);
     len = random(bassSounds).duration();
-    
+    //setVolume(0.5);
     
     if(!randSound.isPlaying() && randSound.isLoaded()) {
         randSound.play();
@@ -124,7 +122,34 @@ function playBassSounds() {
     }  
 }
  
+function playMeditationVoiceLoop() {
+    if(!meditationVoiceLoop.isPlaying() && meditationVoiceLoop.isLoaded()) {
+        meditationVoiceLoop.loop();
+        //meditationVoiceLoop.duration();
+        //console.log(meditationVoiceLoop.duration());
+    } 
+}
+ 
+function stopMeditationVoiceLoop() {
+    if(meditationVoiceLoop.isPlaying() == true) {
+        meditationVoiceLoop.pause();
+    } 
+}
 
+function startMeditationVoiceEnding() {
+    len = meditationVoiceEnding.duration();
+    
+    for (i = 0; i < len; i++) {
+        
+        if (!meditationVoiceEnding.isPlaying() && meditationVoiceEnding.isLoaded()) {
+            stopMeditationVoiceLoop();
+            meditationVoiceEnding.play();
+        } else if (i == len) {
+                meditationVoiceEnding.stop;
+                playMeditationVoiceLoop();
+        }
+    }
+}
 
 function activateZone(zone) {
     zone.isActive = true;
@@ -190,8 +215,6 @@ function setup() {
     myCapture.hide();
     // wait for OpenCV to init
     p5.cv.onComplete = onOpenCVComplete;
-        
-    loopingVoice.push(loadSound("bell_C.wav"));
     
     bellSounds.push(loadSound("bell_C.wav"));
     bellSounds.push(loadSound("bell_FS.wav"));
@@ -207,6 +230,9 @@ function setup() {
     dingSounds.push(loadSound("ding_DS.wav"));
     
     bassSounds.push(loadSound("bassInOut.wav"));
+    
+    meditationVoiceLoop = loadSound("voice_loop.wav");
+    meditationVoiceEnding = loadSound("voice_ending.wav");
 }
 
 function onOpenCVComplete() {
@@ -244,5 +270,8 @@ function draw() {
                 deactivateZone(zone);
             }
         }
+        
+        playMeditationVoiceLoop();
+        meditationVoiceLoop.addCue(216, startMeditationVoiceEnding);
     }
 }
