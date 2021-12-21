@@ -124,8 +124,11 @@ function playBassSounds() {
  
 function doMeditationVoiceLoop() {
     if(!meditationVoiceLoop.isPlaying() && meditationVoiceLoop.isLoaded()) {
-        meditationVoiceLoop.loop();
-        meditationVoiceLoop.duration();
+        meditationVoiceLoop.play();
+        console.log("calling addCue");
+        meditationVoiceLoop.addCue(1, console.log, "add cue callback called");
+        
+        //meditationVoiceLoop.duration();
         console.log(meditationVoiceLoop.duration());
     } 
 }
@@ -137,9 +140,10 @@ function stopMeditationVoiceLoop() {
 }
 
 function doMeditationVoiceImages() {
-    len = meditationVoiceImages.duration();
+    //len = meditationVoiceImages.duration();
+    console.log("here");
 
-    for (i = 0; i < len; i++) {
+   /* for (i = 0; i < len; i++) {
         if (!meditationVoiceImages.isPlaying() && meditationVoiceImages.isLoaded()) {
             stopMeditationVoiceLoop();
             meditationVoiceImages.play();
@@ -147,7 +151,7 @@ function doMeditationVoiceImages() {
                 meditationVoiceImages.stop;
                 doMeditationVoiceLoop();
         }
-    }
+    }*/
 }
 
 
@@ -187,6 +191,18 @@ function isDarkestPointInZone(zone) {
     }
 }
 
+function queueVoiceLoopAndPlayVoiceImages() {
+    console.log("starting voice images");
+    meditationVoiceImages.onended(queueVoiceImagesAndPlayVoiceLoop);
+    meditationVoiceImages.play();
+}
+
+function queueVoiceImagesAndPlayVoiceLoop() {
+    console.log("starting voice loop");
+    meditationVoiceLoop.onended(queueVoiceLoopAndPlayVoiceImages);
+    meditationVoiceLoop.play();
+}
+
 function setup() {
     createCanvas(820, 640);
     // setup p5 capture
@@ -211,7 +227,7 @@ function setup() {
     
     bassSounds.push(loadSound("bassInOut.wav"));
     
-    meditationVoiceLoop = loadSound("voice_loop.wav");
+    meditationVoiceLoop = loadSound("voice_loop.wav", queueVoiceImagesAndPlayVoiceLoop);
     meditationVoiceImages = loadSound("voice_with_images.wav");
 }
 
@@ -250,8 +266,7 @@ function draw() {
                 deactivateZone(zone);
             }
         }
-        
-        doMeditationVoiceLoop();
-        meditationVoiceLoop.addCue(146, doMeditationVoiceImages);
+        //meditationVoiceLoop.addCue(1, doMeditationVoiceImages);
+        //doMeditationVoiceLoop();
     }
 }
