@@ -65,113 +65,33 @@ let bassSounds = [];
 let singingSounds = [];
 let meditationVoiceLoop;
 
-function playBellSounds() {
-    //bell = bellSounds[j];
-    randSound = random(bellSounds);
-    len = random(bellSounds).duration();
-    randSound.setVolume(0.1);
+function playRandomSound(sounds, volume) {
+    randSound = random(sounds);
+    randSound.setVolume(volume);
     
     if(!randSound.isPlaying() && randSound.isLoaded()) {
         randSound.play();
         console.log("playing")
-    } else if(randSound == len) {
-        randSound.stop;
-        console.log("stopping")
     }  
 }
-
-function playSingingSounds() {
-    randSound = random(singingSounds);
-    len = random(singingSounds).duration();
-    randSound.setVolume(0.1);
-    
-    if(!randSound.isPlaying() && randSound.isLoaded()) {
-        randSound.play();
-        console.log("playing")
-    } else if(randSound == len) {
-        randSound.stop;
-        console.log("stopping")
-    }  
-}
-
-function playDingSounds() {
-    randSound = random(dingSounds);
-    len = random(dingSounds).duration();
-    randSound.setVolume(0.8);
-    
-    if(!randSound.isPlaying() && randSound.isLoaded()) {
-        randSound.play();
-        console.log("playing")
-    } else if(randSound == len) {
-        randSound.stop;
-        console.log("stopping")
-    }  
-}
-
-function playBassSounds() {
-    randSound = random(bassSounds);
-    len = random(bassSounds).duration();
-    //setVolume(0.5);
-    
-    if(!randSound.isPlaying() && randSound.isLoaded()) {
-        randSound.play();
-        console.log("playing")
-    } else if(randSound == len) {
-        randSound.stop;
-        console.log("stopping")
-    }  
-}
- 
-function doMeditationVoiceLoop() {
-    if(!meditationVoiceLoop.isPlaying() && meditationVoiceLoop.isLoaded()) {
-        meditationVoiceLoop.play();
-        console.log("calling addCue");
-        meditationVoiceLoop.addCue(1, console.log, "add cue callback called");
-        
-        //meditationVoiceLoop.duration();
-        console.log(meditationVoiceLoop.duration());
-    } 
-}
-
-function stopMeditationVoiceLoop() {
-    if(meditationVoiceLoop.isPlaying() == true) {
-        meditationVoiceLoop.pause();
-    } 
-}
-
-function doMeditationVoiceImages() {
-    //len = meditationVoiceImages.duration();
-    console.log("here");
-
-   /* for (i = 0; i < len; i++) {
-        if (!meditationVoiceImages.isPlaying() && meditationVoiceImages.isLoaded()) {
-            stopMeditationVoiceLoop();
-            meditationVoiceImages.play();
-        } else if (i == len) {
-                meditationVoiceImages.stop;
-                doMeditationVoiceLoop();
-        }
-    }*/
-}
-
 
 function activateZone(zone) {
     zone.isActive = true;
     
     if(zone == zoneOne) {
-        playBellSounds();
+        playRandomSound(bellSounds, 0.1);
     }
     
     if(zone == zoneTwo) {
-        playSingingSounds();
+        playRandomSound(singingSounds, 0.1);
     }
     
     if(zone == zoneThree) {
-        playDingSounds();
+        playRandomSound(dingSounds, 0.8);
     }
     
     if(zone == zoneFour) {
-        playBassSounds();
+        playRandomSound(bassSounds, 0.5);
     }
     
     print(zone.name, " was just activated");
@@ -182,7 +102,6 @@ function deactivateZone (zone) {
     print(zone.name, " was just de-activated");
 }
 
-//ex: isDarkestPointInZone(zoneOne);
 function isDarkestPointInZone(zone) {
     if(darkestPoint.x < zone.box.width+zone.box.x && darkestPoint.y < zone.box.height+zone.box.y) {
         return true;
@@ -266,7 +185,5 @@ function draw() {
                 deactivateZone(zone);
             }
         }
-        //meditationVoiceLoop.addCue(1, doMeditationVoiceImages);
-        //doMeditationVoiceLoop();
     }
 }
