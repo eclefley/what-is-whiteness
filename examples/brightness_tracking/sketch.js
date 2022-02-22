@@ -37,7 +37,7 @@ let zoneThree = {
     x: 0,
     y: 0,
     width: 770,
-    height: 5,
+    height: 50,
     },
     isActive: false,
     name: 'LK3',
